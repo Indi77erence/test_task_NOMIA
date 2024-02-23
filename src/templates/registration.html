@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="hello">
+    <h2>Создайте первое заведение</h2>
+</div>
+<div class="search">
+    <form name="register" id="myForm">
+        <input type="email" name="email" id="reg_email" placeholder="Email">
+        <input type="password" name="password" id="reg_password" placeholder="Password">
+        <p></p>
+        <input type="text" name="name_establishment" id="reg_name" placeholder="Название заведения">
+        <select name="type_of_establishment" id="answer_select" style="border-radius: 42px; width: 250px; height: 40px;">
+            {% for var in questions_type_est.values() %}
+                {% for type in var %}
+                <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+        <p></p>
+        <button style="width: 200px;">Зарегистрироваться</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('myForm');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {};
+
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        const jsonData = JSON.stringify(data);
+
+        try {
+            const response = await fetch('/create_establishment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+
+            if (response.ok) {
+                console.log('Данные успешно отправлены');
+                window.location.href = '/log_in';
+            } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.error;
+                console.error(`Произошла ошибка при отправке данных: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Произошла ошибка при отправке данных:', error);
+        }
+    });
+</script>
+{% endblock %}

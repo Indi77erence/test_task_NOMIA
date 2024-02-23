@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="surveys">
+    <form id="survey-form">
+        {% for sur, quest in survey.items() %}
+            <div class="survey">
+                <div class="name_survey">
+                    <a><h2>{{ sur }}</h2></a>
+
+                </div>
+                {% for q in quest %}
+                    <div class="question" style="margin: 20px 25px;">
+                        <div class="question-text" style="text-align: left;">
+                            <a><h3>{{ q[0] }}</h3></a>
+                        </div>
+
+                        <div class="input-container" style="margin: 20px 25px;">
+                            {% if q[0] in multi_questions.keys() %}
+                                <select name="answer_select" data-question-id="{{ q[1] }}" style="border-radius: 42px; width: 250px; height: 40px;">
+                                    {% for var in multi_questions[q[0]] %}
+                                        <option value="{{ var }}">{{ var }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="text" name="answer" placeholder="Ответ" data-question-id="{{ q[1] }}" style="text-align: center;">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" onclick="submitForm(event)">Далее</button>
+    </form>
+</div>
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Create an empty array to store the survey data
+            var surveyData = [];
+
+            // Get all answer input elements
+            var answerInputs = document.querySelectorAll('input[name="answer"], select[name="answer_select"]');
+
+            // Iterate over each answer input element and get its value and data-question-id attribute value
+            answerInputs.forEach(function(input) {
+                var answer = input.value;
+                var questionId = input.getAttribute("data-question-id");
+
+                // Create an object to store the question ID and answer data
+                var questionData = {
+                    answer_text: answer,
+                    question_id: parseInt(questionId)
+                };
+
+                // Push the question data to the survey data array
+                surveyData.push(questionData);
+            });
+
+            // Send the survey data to the server
+            fetch('/api/v1/create_answer', {
+                method: 'POST',
+                body: JSON.stringify(surveyData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
+
+                // Redirect the user to the desired URL
+                var selectElement = document.querySelector('select[name="answer_select"]');
+                var selectedAnswer = selectElement ? selectElement.value : '';
+
+              if (selectedAnswer === 'в заведении' || selectedAnswer === 'Навынос' || selectedAnswer === 'Доставка'
+              || selectedAnswer === 'Доставка' || selectedAnswer === 'Медицинская клиника'
+              || selectedAnswer === 'Фитнес-центр' || selectedAnswer === 'Салон красоты'
+              || selectedAnswer === 'Туристическое агентство' || selectedAnswer === 'Супермаркеты и гипермаркеты'
+              || selectedAnswer === 'Магазины одежды и обуви'
+              || selectedAnswer === 'Магазины электроники и бытовой техники' || selectedAnswer === 'Другое') {
+                window.location.href = '/onboarding/' + encodeURIComponent(selectedAnswer);
+            } else {
+                // Show an error message or take appropriate action
+                window.location.href = '/final';
+}
+            })
+            .catch(error => {
+
+                console.error('Error:', error);
+            });
+        }
+    </script>
+{% endblock %}

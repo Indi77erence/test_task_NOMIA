@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="hello">
+        <h2>Войдите в свою учётную запись</h2>
+    </div>
+    <div class="login">
+        <form name="login" action="/auth/login" method="post">
+            <input type="text" name="username" id="username" placeholder="Email">
+            <input type="password" name="password" id="password" placeholder="Пароль">
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+</div>
+<script>
+    const form = document.querySelector('form[name="login"]');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Отменить отправку формы по умолчанию
+        const username = document.getElementById('username').value; // Получить значение поля email
+        const password = document.getElementById('password').value; // Получить значение поля пароля
+
+        // Преобразование данных формы в формат application/x-www-form-urlencoded
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
+
+        // Отправить данные на сервер
+        fetch('/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        })
+        .then(() => {
+            // Перенаправить пользователя на страницу /onboarding
+            const text = "Общие сведения";
+            const encodedText = encodeURIComponent(text);
+            window.location.href = '/onboarding/' + encodedText;
+})
+        .catch(error => {
+            console.log('Ошибка при отправке данных на сервер', error);
+        });
+    });
+</script>
+{% endblock %}

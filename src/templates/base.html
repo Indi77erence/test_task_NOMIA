@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block head %}{% endblock %}
+    <title>Onboarding service</title>
+</head>
+
+<body>
+<h1>Onboarding service</h1>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
+<style>
+
+
+body {
+  background-image: url(https://envybox.io/blog/wp-content/uploads/2020/02/1-6.jpg);
+  font-family: 'Roboto', sans-serif;
+}
+html{ height:100%; font-family: 'Roboto Condensed'; }
+<!--body{ min-height:100%;  background-image: -webkit-radial-gradient(top, circle cover, #252233 0%, #252233 80%);-->
+
+
+ background-image: -moz-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+ background-image: -o-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+ background-image: radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%); }
+
+*{ margin:0; padding:0; }
+
+body{ text-align:center; padding:20px 0; }
+
+h1{ font-size:3em; color:#fff; margin-bottom:50px; letter-spacing:-1px; text-transform:capitalize; text-shadow:0 2px 2px rgba(0,0,0,0.6); }
+h2{color:#fff;}
+h3{color:#fff;}
+ul{ background-color:rgba(0,0,0,0.4); border-bottom:1px solid rgba(255,255,255,0.25); box-shadow:0 0 8px rgba(0,0,0,0.4) inset; border-radius:16px; margin:0; padding:0 30px; }
+ul{ display:inline-block; text-align:center; height:50px; overflow:hidden; }
+ul li a{ letter-spacing:-1px; text-decoration:none; text-transform:capitalize; color:#FFF; }
+ul li{ float:left; height:100%; list-style:none; margin:0 30px; }
+ul li *{ display:inline-block; font-size:1.3em; line-height:50px; }
+ul li a{ margin-top:-50px; transition:0.3s cubic-bezier(0.1, 0.1, 0.5, 1.4); }
+ul li a:hover{ margin-top:0; }
+ul li a:before{ content:attr(data-text); display:block; color:#CDF745; }
+ color:#CDF745; }
+
+
+* {box-sizing: border-box;}
+form {
+  padding-top: 30px;
+  width: auto;
+  float: center;
+  margin-right: 30px;
+}
+
+.search {
+padding-top: 15px;
+}
+
+.videos {
+    position: center;
+    max-width:2px;
+    max-height: auto;
+    border: 50px solid #aaaaaa;
+}
+.video {
+    position: relative;
+    margin: 50px 300px 50px 50px;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+.detail {
+    max-height: auto;
+    margin: 50px 300px 50px 50px;
+}
+
+
+
+
+
+* {box-sizing: border-box;}
+form {
+  width: auto;
+  float: center;
+  margin-right: 30px;
+}
+
+input {
+  width: 200px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e;
+  background: #FFF;
+  outline: none;
+
+  transition: .3s linear;
+}
+
+input:focus {
+  width: 300px;
+  background: #CDF745;
+}
+
+input[name="answer"] {
+  width: 300px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e;
+  background: #FFF;
+  outline: none;
+
+  transition: .3s linear;
+}
+
+input[name="answer"]:focus {
+  padding-top: 15px;
+  width: 500px;
+  background: #CDF745;
+}
+
+button[id="redirect-button"] {
+  width: 200px;
+  height: 42px;
+  border-radius: 42px;
+  background: #FFF;
+}
+
+button {
+  width: 100px;
+  height: 42px;
+  border-radius: 42px;
+  margin-right: 30px;
+  background: #FFF;
+}
+
+button:hover {
+      background-color:#CDF745;
+      transition: 0.1s;
+  }
+
+img {
+    width: 400px;
+    height: 250px;
+    margin-bottom: 25px;
+    float: left;
+}
+
+.content {
+    margin: 20px auto; /* Добавляем отступы по вертикали и автоматический отступ по горизонтали */
+    max-width: 1000px;
+    padding: 20px 25px 20px 25px;
+    border-radius: 30px;
+    border: 3px solid white;
+    padding-block: inherit;
+
+}
+
+.question {
+    padding-top: 10px;
+}
+
+.all_comment {
+    background-color: white;
+    margin: 50px 300px 50px 300px;
+    border-radius: 42px;
+}
+.comment {
+    text-align: left;
+    padding-left: 50px;
+    }
+
+.desc h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 268%;
+}
+
+.add_video div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add_video label {
+  flex-basis: 150px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.question input[type="text"] {
+    flex-grow: 1;
+}
+.add_video input[type="file"] {
+
+}
+
+.add_video button {
+  margin-top: 10px;
+}
+</style>

@@ -5,6 +5,7 @@ services:
     container_name: 'api'
     command: >
       sh -c "alembic upgrade head &&
+             python add_survay_questions.py &&
              uvicorn src.main:create_app --host 0.0.0.0"
     ports:
       - 8000:8000

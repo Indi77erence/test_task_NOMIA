@@ -38,8 +38,6 @@ async def get_answer_list(session: AsyncSession):
     return result_fin
 
 
-#
-#
 async def get_answers_by_estab(establishment_id: int, session: AsyncSession):
     stmt = select(answer).where(answer.c.establishment_id == establishment_id)
     result = await session.execute(stmt)
